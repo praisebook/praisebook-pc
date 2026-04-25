@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PraiseBook Manager - Sincronización</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <h1>PraiseBook</h1>
+            <span class="version">PC Manager</span>
+            <button id="btn-tema" onclick="toggleTema()" class="btn-tema"><span class="material-icons" style="font-size: 16px; margin-right: 5px;">light_mode</span> Tema Claro</button>
+        </div>
+        <div class="connection-bar">
+            <span id="connection-status" class="status-disconnected">Desconectado</span>
+            <div id="pin-input-area">
+                <input type="text" id="pin-code" placeholder="PIN de la App" maxlength="4">
+                <button onclick="conectarApp()" id="btn-connect">Conectar</button>
+            </div>
+            <div id="connection-info-area" style="display: none;">
+                Conectado a: <span id="connected-id"></span>
+                <button onclick="desconectarApp()" id="btn-disconnect">Desconectar</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="app-manager" class="layout-three-columns" style="display: none;">
+        
+        <aside class="col-songs">
+            <div class="col-header">
+                <h2>Canciones</h2>
+                <button onclick="crearNuevaCancion()" title="Nueva Canción">+</button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="song-search" placeholder="Buscar canción...">
+            </div>
+            <div id="song-list" class="song-list">
+            </div>
+        </aside>
+
+        <section class="col-editor">
+            <div class="col-header">
+                <h2>Editor</h2>
+            </div>
+            
+            <div class="editor-fields">
+                <input type="text" id="editor-title" placeholder="Título de la canción">
+                <input type="text" id="editor-artist" placeholder="Artista / Autor">
+            </div>
+
+            <div class="editor-fields-row">
+                <input type="text" id="editor-tono" placeholder="Tono (ej. C#m)">
+                <input type="number" id="editor-bpm" placeholder="BPM (ej. 85)">
+                <input type="number" id="editor-vel" placeholder="Vel Letra (ej. 5)">
+            </div>
+
+            <div class="editor-toolbar">
+                <div class="spacer"></div>
+                <button onclick="cancelarEdicion()" class="btn-secondary">Cancelar</button>
+                <button onclick="guardarCambios()" class="btn-primary">Guardar Cambios en App</button>
+            </div>
+
+            <textarea id="editor-content" placeholder="Escribe tu canción aquí... Usa [Acordes] entre corchetes para alinearlos automáticamente."></textarea>
+        </section>
+
+        <section class="col-preview">
+            <div class="col-header">
+                <h2>Vista Previa (Móvil)</h2>
+            </div>
+            
+            <div class="visualizer-container">
+                <div id="preview-display" class="preview-display">
+                    <div class="empty-preview">Selecciona una canción</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="manager.js"></script>
+</body>
+</html>
